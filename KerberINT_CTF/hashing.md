@@ -24,7 +24,7 @@ $ ./hashing.sh
 CTF{vuihv}   
 66b6f58f9d61e2033042829679d8ea68   
 
-With that, we can figure out that it is generating a random 5-letter string and putting it inside the CTF{ } tags. It then hashes the output with MD5 and prints both strings. We are given a hashed version of the flag, so we simply have to finf the 5-letter string that correspond to it.
+With that, we can figure out that it is generating a random 5-letter string and putting it inside the CTF{ } tags. It then hashes the output with MD5 and prints both strings. We are given a hashed version of the flag, so we simply have to find the 5-letter string that corresponds to it.
 
 
 
@@ -43,7 +43,7 @@ for a in alphabets:
                     flag = "CTF{"+a+b+c+d+e+"}"
 ```
 
-A quick google search give us a function to [calculate the md5sum of a string](https://stackoverflow.com/questions/16874598/how-do-i-calculate-the-md5-checksum-of-a-file-in-python)
+A quick google search give us a function to [calculate the md5sum of a string](https://stackoverflow.com/questions/16874598/how-do-i-calculate-the-md5-checksum-of-a-file-in-python). 
 We use it and compare the output to the hashed flag we were given at the beginning. When the two matches, we just have to give back the non-hashed flag.
 
 ```python
