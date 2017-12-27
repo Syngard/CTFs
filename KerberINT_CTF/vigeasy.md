@@ -39,9 +39,9 @@ print(cipher)
 
 From the name of the challenge, we can guess that this will be some kind of Vigenere cipher. But first let's understand what the `zip(plaintext, cycle(key))` does.
 
-$ python
-\>\>\> from itertools import cycle
-\>\>\> zip("plaintext",cycle("123"))
+$ python    
+\>\>\> from itertools import cycle   
+\>\>\> zip("plaintext",cycle("123"))   
 [('p', '1'), ('l', '2'), ('a', '3'), ('i', '1'), ('n', '2'), ('t', '3'), ('e', '1'), ('x', '2'), ('t', '3')]
 
 
