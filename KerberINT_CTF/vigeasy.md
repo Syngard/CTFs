@@ -61,7 +61,7 @@ def decrypt(key, ciphertext):
         result += ALPHA[total % len(ALPHA)]
 
     return result
-```python
+```
 
 Then we need a function to try all possible letters and check which one gives us the known plaintext (in this case, "CTF{").
 
@@ -84,7 +84,7 @@ Let's test that with what we know.
 print find_key(ciphertext, "CTF{")
 ```
 
-$ ./vig\_baby.py 
+$ ./vig\_baby.py   
 R4ge
 
 
