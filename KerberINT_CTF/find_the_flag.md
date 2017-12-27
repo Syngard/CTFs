@@ -9,18 +9,24 @@
 ## Solution write-up
 
 Let's use netcat to see what the server actually gives us :   
+
+
 $ nc XXX.XXX.XXX.XXX 3333   
 qwerty ( <= this is what I typed )   
 Wrong flag ! ( <= and this is what the server answered )   
 
 
 This doesn't help us much, as we obviously know that "qwerty" is not the flag. But we already know the first four characters of it, as they are always "CTF{". What if we give this to the server ?   
+
+
 $ nc XXX.XXX.XXX.XXX 3333   
 CTF{   
 You're on the right track !   
 
 
 That's interesting. And if we try to add another character ?    
+
+
 $ nc XXX.XXX.XXX.XXX 3333   
 CTF{a   
 Wrong flag !   
@@ -36,7 +42,7 @@ def tcp_client(msg):
     client = socket.socket( socket.AF_INET, socket.SOCK_STREAM)
     client.connect(( HOST, PORT ))
 
-    client.send(flag)
+    client.send(msg)
     return client.recv(4096)
 ```
 
