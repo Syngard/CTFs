@@ -22,9 +22,9 @@ def encrypt(key, plaintext):
 
     return result
 
-def decrypt(key, plaintext):
+def decrypt(key, ciphertext):
     """Encrypt the string and return the ciphertext"""
-    pairs = zip(plaintext, cycle(key))
+    pairs = zip(ciphertext, cycle(key))
     result = ''
 
     for pair in pairs:
