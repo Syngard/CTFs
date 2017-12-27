@@ -9,24 +9,30 @@
 ## Solution write-up
 
 Let's use netcat to see what the server actually gives us :   
-$ nc XXX.XXX.XXX.XXX 3333
-qwerty ( <= this is what I typed )
-Wrong flag ! ( <= and this is what the server answered )
 
 
-This doesn't help us much, as we obviously know that "qwerty" is not the flag. But we already know the first four characters of it, as they are always "CTF{". What if we give this to the server ?
-$ nc XXX.XXX.XXX.XXX 3333
-CTF{
-You're on the right track !
+$ nc XXX.XXX.XXX.XXX 3333   
+qwerty ( <= this is what I typed )   
+Wrong flag ! ( <= and this is what the server answered )   
 
 
-That's interesting. And if we try to add another character ?   
-$ nc XXX.XXX.XXX.XXX 3333
-CTF{a
-Wrong flag !
+This doesn't help us much, as we obviously know that "qwerty" is not the flag. But we already know the first four characters of it, as they are always "CTF{". What if we give this to the server ?   
 
 
-With that we can guess how to get the flag : we have to bruteforce it one character at the time. As always I did it with python beacause I find it easier. First thing we need is a module to establish a TCP connection to the server on the specified port. The [socket module](https://wiki.python.org/moin/TcpCommunication#Client) is super useful for that purpose. Let's write a TCP client that will send to the server whatever we feed it.
+$ nc XXX.XXX.XXX.XXX 3333   
+CTF{   
+You're on the right track !   
+
+
+That's interesting. And if we try to add another character ?    
+
+
+$ nc XXX.XXX.XXX.XXX 3333   
+CTF{a   
+Wrong flag !   
+
+
+With that we can guess how to get the flag : we have to bruteforce it one character at the time. As always I did it with python beacause I find it easier. First thing we need is a module to establish a TCP connection to the server on the specified port. The [socket module](https://wiki.python.org/moin/TcpCommunication#Client) is super useful for that purpose. Let's write a TCP client that will send to the server whatever we feed it.   
 
 ```python
 HOST = 'XXX.XXX.XXX.XXX'
@@ -36,7 +42,7 @@ def tcp_client(msg):
     client = socket.socket( socket.AF_INET, socket.SOCK_STREAM)
     client.connect(( HOST, PORT ))
 
-    client.send(flag)
+    client.send(msg)
     return client.recv(4096)
 ```
 
