@@ -39,11 +39,12 @@ print(cipher)
 
 From the name of the challenge, we can guess that this will be some kind of Vigenere cipher. But first let's understand what the `zip(plaintext, cycle(key))` does.
 
+```
 $ python    
-\>\>\> from itertools import cycle   
-\>\>\> zip("plaintext",cycle("123"))   
+>>> from itertools import cycle   
+>>> zip("plaintext",cycle("123"))   
 [('p', '1'), ('l', '2'), ('a', '3'), ('i', '1'), ('n', '2'), ('t', '3'), ('e', '1'), ('x', '2'), ('t', '3')]
-
+```
 
 Along with a bit of [documentation](https://docs.python.org/2/library/itertools.html#itertools.cycle), we can understand that `zip` pairs characters in the same position and cycle allows to repeat the key when all if its letters are used. So the `encrypt` function is a Vigenere cipher, but that operates on a larger alphabet compared to the [original version](https://en.wikipedia.org/wiki/Vigen%C3%A8re_cipher). 
 
@@ -83,10 +84,10 @@ Let's test that with what we know.
 ```python
 print find_key(ciphertext, "CTF{")
 ```
-
+```
 $ ./vig\_baby.py   
 R4ge
-
+```
 
 A leet speak word. Seems reasonable to think we're on the right track as keys/flags are often leet speak sentences.
 
