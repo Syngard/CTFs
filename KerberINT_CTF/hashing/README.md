@@ -16,13 +16,14 @@ echo -n $flag | md5sum
 ## Solution write-up
 First thing we should try to do when faced with a script is trying to figure out what it does. Since this one is given to us and uses not so common commands (tr and fold), the best thing to do is simply to run it a few times.
 
+```
 $ ./hashing.sh   
 CTF{owukk}   
 f8abf8ef98a83ffd7c5145320da34a58    
-   
 $ ./hashing.sh    
 CTF{vuihv}   
 66b6f58f9d61e2033042829679d8ea68   
+```
 
 With that, we can figure out that it is generating a random 5-letter string and putting it inside the CTF{ } tags. It then hashes the output with MD5 and prints both strings. We are given a hashed version of the flag, so we simply have to find the 5-letter string that corresponds to it.
 
@@ -69,7 +70,7 @@ for a in alphabets:
 After a few seconds wait, the script gives us the flag.
 
 
-
+```
 $ ./hashing.py  
 CTF{tcvlb}
-
+```
