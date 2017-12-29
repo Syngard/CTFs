@@ -31,12 +31,11 @@ Let's then start by recovering the time value that was used as a seed. To do tha
 
 ```
 $ python
-\>\>\> import time
-\>\>\> import time
-\>\>\> t = str(time.time()).encode('ASCII')
-\>\>\> t
+>>> import time
+>>> t = str(time.time()).encode('ASCII')
+>>> t
 '1514581353.81'
-\>\>\> len(t)
+>>> len(t)
 13
 ```
 
@@ -58,11 +57,11 @@ Something is not right. We don't have enough numbers before the dot and too much
 
 ```
 $ python3
-\>\>\> import time
-\>\>\> t = str(time.time()).encode('ASCII')
-\>\>\> t
+>>> import time
+>>> t = str(time.time()).encode('ASCII')
+>>> t
 b'1514582787.0529299'
-\>\>\> len(t)
+>>> len(t)
 18
 ```
 
@@ -94,7 +93,7 @@ with open("top_secret",'rb') as msg:
 
 ```
 $ python3 top.py 
-Here is your flag: 34C3\_otp\_top\_pto\_pot\_tpo\_opt\_wh0\_car3s
+Here is your flag: 34C3_otp_top_pto_pot_tpo_opt_wh0_car3s
 ```
 
 And we got the flag o/   
