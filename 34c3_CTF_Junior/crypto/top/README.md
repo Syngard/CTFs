@@ -39,7 +39,7 @@ $ python
 13
 ```
 
-Okay so it is a 13-char long string, whith 10 digits, a dot and then 2 other digits. Since it represents the [time in seconds since January 1st, 1970](https://en.wikipedia.org/wiki/Epoch_(reference_date)#Computing), the first few digits of the seed should be the same (because the challenge and the flag were created at best a few months back). Let's take the last 13 characters of the encrypted flag, which should be the seed, and XOR them with "0x88" chars to get back the original timestamp.
+As we can see,`time.time()` returns a 13-char long string, whith 10 digits, a dot and then 2 other digits. Since it represents the [time in seconds since January 1st, 1970](https://en.wikipedia.org/wiki/Epoch_(reference_date)#Computing), the first few digits of the seed should be the same (because the challenge and the flag were created at best a few months back). Let's take the last 13 characters of the encrypted flag, which should be the seed, and XOR them with "0x88" chars to get back the original timestamp.
 
 ```python
 with open("top_secret",'rb') as msg:
