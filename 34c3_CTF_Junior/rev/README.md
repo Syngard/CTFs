@@ -35,7 +35,7 @@ ______________={not not not ___ and not not ___:lambda:__________________('\x41\
 ______________[[_____(*________) for ________ in _______________(____________________________(_________(__________,___________)),____________________________(_________(__________,___________))[::-1])][::-1]==[160,155,208,160,190,215,237,134,210,126,212,222,224,238,128,240,164,213,183,192,162,178,163,162] and 'mo4r' in ___________ and '34C3_' in ___________ and ___________.split('_')[3] == 'tzzzz']()
 ```
 
-So we are renaming some functions with non-readable names and then applying them to some values. Next, we have to rename everything so as to understand what is actually happening here.
+Apparently, it is renaming some functions with non-readable names and then applying them to some values. Next, we have to rename everything so as to understand what is actually happening here.
 
 ```python
 #____=input; (4)
@@ -54,13 +54,16 @@ olol = lambda a,b : a+(b^21);
 
 correct = {False: lambda: print('Almost!!'), True: lambda: print('Correct!')};
 
-correct[[olol(*a) for a in zip(list(map(ord,data)), list(map(ord,data))[::-1])][::-1]==[160,155,208,160,190,215,237,134,210,126,212,222,224,238,128,240,164,213,183,192,162,178,163,162] and 'mo4r' in data and '34C3_' in data and data.split('_')[3] == 'tzzzz']()
+correct[[olol(*a) for a in zip(list(map(ord,data)), list(map(ord,data))[::-1])][::-1]==   
+[160,155,208,160,190,215,237,134,210,126,212,222,224,238,128,240,164,213,183,192,162,178,163,162]   
+and 'mo4r' in data and '34C3_' in data and data.split('_')[3] == 'tzzzz']()
 ```
 
-The `correct` function will print if out password was correct depending on how the boolean expression given as a parameter will evaluate. We can break it down into three different conditions :
+The `correct` function will print if the given password was correct or not depending on how the boolean expression given as a parameter will evaluate. We can break the expression down into two different conditions :
 
 ```python
-olol(*a) for a in zip(list(map(ord,data)), list(map(ord,data))[::-1])][::-1] == [160,155,208,160,190,215,237,134,210,126,212,222,224,238,128,240,164,213,183,192,162,178,163,162]
+olol(*a) for a in zip(list(map(ord,data)), list(map(ord,data))[::-1])][::-1] ==   
+[160,155,208,160,190,215,237,134,210,126,212,222,224,238,128,240,164,213,183,192,162,178,163,162]
 ```
 The data encrypted with the `olol` function must be equal to this array. We'll explore later how exactlty is the encryption done.
 
