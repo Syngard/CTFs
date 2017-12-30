@@ -98,3 +98,140 @@ The `[::-1]` reverses the order of the elements in the list.
 Finally, [zip](https://docs.python.org/2/library/functions.html#zip) pairs elements one to one from its first and second arguments.  
   
 It is also important not to forget that the resulting list will be reversed as well before beeing compared.
+
+With that knowledge, we know understand that the first character of the flag will be encrypted with the last one, the second with the second last, etc... We have to recover the flag two characters at the time, starting from both ends. In a first time, we can verify our assumptions on the flag format.
+
+```python
+olol = lambda a,b : a+(b^21)
+
+flag_b = "34C3_"  # Since we will have to construct it from the middle
+flag_e = "_tzzzz" # let's separate the flag into a beginning and an end part
+
+ciphered_flag = [160,155,208,160,190,215,237,134,210,126,212,222,224,238,128,240,164,213,183,192,162,178,163,162]
+
+test_flag = flag_b + flag_e
+test_flag_ciphered = [olol(*a) for a in zip(list(map(ord,test_flag)), list(map(ord,test_flag))[::-1])][::-1] 
+
+print test_flag_ciphered
+```
+
+```
+$ python nohtp1_solve.py 
+[160, 155, 208, 160, 190, 169, 192, 162, 178, 163, 162]
+```
+
+We can see that the first 5 values match the values in the `ciphered_flag` array, and the same is true for the last 5 ones. So our assumption about the flag format was correct. However, the 6th value does not correspond to anything in the array we want to obtain. That's because, since our `test_flag` is 11 characters long, the middle one will be encrypted with itself. We shoud then try to find with which character it shoud be encrypted to give the expected values at the positions we want in the resulting array (meaning 215 at the 6th position and 183 at the 6th starting from the end)
+
+```python
+import string
+
+# I supposed that the flag probably only included letters, numbers and underscores
+# but no other special character
+ALPHA = string.ascii_letters + string.digits + '_'
+olol = lambda a,b : a+(b^21)
+
+flag_b = "34C3_"
+flag_e = "_tzzzz"
+
+ciphered_flag = [160,155,208,160,190,215,237,134,210,126,212,222,224,238,128,240,164,213,183,192,162,178,163,162]
+
+k = len(flag_b)
+for i in ALPHA:
+    test_flag = flag_b + i + flag_e
+    test_flag_ciphered = [olol(*a) for a in zip(list(map(ord,test_flag)), list(map(ord,test_flag))[::-1])][::-1]
+
+    if (test_flag_ciphered[k] == ciphered_flag[k] and test_flag_ciphered[-k-1] == ciphered_flag[-k-1]):
+        print test_flag
+```
+
+```
+$ python nohtp1_solve.py 
+34C3_m_tzzzz
+```
+
+Okay so the first letter after "34C3\_" is an 'm'. Now we can try to find the characters 2 by two. One that goes after the 'm' and the other that will land just before the "\_tzzzz".
+
+```python
+flag_b = "34C3_m" # Since we found that an 'm' should follow I added it direcly 
+flag_e = "_tzzzz"
+
+for i in ALPHA:
+    for j in ALPHA:
+        test_flag = flag_b + i + j +flag_e
+        test_flag_ciphered = [olol(*a) for a in zip(list(map(ord,test_flag)), list(map(ord,test_flag))[::-1])][::-1]
+
+        k = len(flag_b)
+
+        if (test_flag_ciphered[k] == ciphered_flag[k] and test_flag_ciphered[-(k+1)] == ciphered_flag[-(k+1)]):
+            print test_flag
+```
+
+```
+$ python nohtp1_solve.py 
+34C3_mfz_tzzzz
+34C3_mnr_tzzzz
+34C3_mos_tzzzz
+```
+
+Ah, this time there are several possibilities. However, since we know that the flag must contain the word "mo4r", the last one is the most likely to be the one we are looking for. We could then just add manually the letters to our `flag_b` and `flag_e` variables, but that wouldn't be any fun. So let's automate that a bit. Since there are several possibilities each time, we're also going to use the hint that gives us the md5sum of the flag to stop when we have the right one.
+
+```python
+possible_flags = [[flag_b, flag_e]] # All potential flags
+mo4r_test_flags = [] # Potential flags that contain "mo4r"
+
+checked = False
+while (not checked):
+    new_possible_flags = []
+    for [flag_b, flag_e] in possible_flags:
+        for i in ALPHA:
+            for j in ALPHA:
+                test_flag = flag_b + i + j +flag_e
+                test_flag_ciphered = [olol(*a) for a in zip(list(map(ord,test_flag)), list(map(ord,test_flag))[::-1])][::-1]
+                #print test_flag_ciphered
+            
+                k = len(flag_b)
+            
+                if (test_flag_ciphered[k] == ciphered_flag[k] and test_flag_ciphered[-(k+1)] == ciphered_flag[-(k+1)]):
+                    if ("mo4r" in test_flag and test_flag.count('_') == 3 and len(test_flag) == len(ciphered_flag)):
+                        print test_flag
+                        mo4r_test_flags.append(test_flag)
+                    new_possible_flags.append([flag_b+i,j+flag_e])
+    
+    possible_flags = new_possible_flags
+```
+
+```
+$ python nohtp1_solve.py 
+34C3_mo4r_sajn4kes_tzzzz
+34C3_mo4r_schn4kes_tzzzz
+34C3_mo4r_senn4kes_tzzzz
+34C3_mo4r_sgln4kes_tzzzz
+34C3_mo4r_sibn4kes_tzzzz
+34C3_mo4r_smfn4kes_tzzzz
+34C3_mo4r_sodn4kes_tzzzz
+34C3_mo4r_sqzn4kes_tzzzz
+34C3_mo4r_ssxn4kes_tzzzz
+34C3_mo4r_syrn4kes_tzzzz
+```
+
+Here are our final candidates. We only have to find the correct one by testing their md5 hash.
+
+```python
+flag_sum = "5a76c600c2ca0f179b643a4fcd4bc7ac"
+
+for flag in mo4r_test_flags:
+    m = hashlib.md5(flag).hexdigest()
+    #print m
+    if (str(m) == flag_sum):
+        print "FLAG: "+flag
+```
+
+However, when we test that - for a reason I don't understand - it seems that none of the hashes matches the one we're looking for. 
+Still, when we test individually each potential flag in a terminal we find that 
+
+```
+$ echo "34C3_mo4r_schn4kes_tzzzz" | md5sum
+5a76c600c2ca0f179b643a4fcd4bc7ac
+```
+
+And there is our flag : 34C3\_mo4r\_schn4kes\_tzzzz
