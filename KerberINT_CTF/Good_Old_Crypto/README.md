@@ -34,3 +34,8 @@ plaintext=sys.argv[2]+key
 cipher=encrypt(key,plaintext)
 print(cipher)
 ```
+
+## Solution write-up
+
+Since this challenge is really similat to [VigBaby](../VigBaby), I won't detail the whole solution but will rather focus on the differences.  
+The only actual difference in the encryption between this challenge and VigBaby is that we now have some kind of loss of information. The reason for that is that the encrypted char is given `mod 26`, 
