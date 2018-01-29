@@ -49,7 +49,7 @@ $ python
 Along with a bit of [documentation](https://docs.python.org/2/library/itertools.html#itertools.cycle), we can understand that `zip` pairs characters in the same position and cycle allows to repeat the key when all if its letters are used. So the `encrypt` function is a Vigenere cipher, but that operates on a larger alphabet compared to the [original version](https://en.wikipedia.org/wiki/Vigen%C3%A8re_cipher). 
 
 
-It's a standart cipher and we already know the first four characters of the plaintext, so we can easily retrieve the first four letters of the key. Let's write a function that does the exact opposite of the `encrypt` that we are given, and let's call it `decrypt`. The only thing we have to do here is change the '+' sign to a '-' sign . It will simply decrypt the ciphertext with the given key. 
+It's a standard cipher and we already know the first four characters of the plaintext, so we can easily retrieve the first four letters of the key. Let's write a function that does the exact opposite of the `encrypt` that we are given, and let's call it `decrypt`. The only thing we have to do here is change the '+' sign to a '-' sign . It will simply decrypt the ciphertext with the given key. 
 
 ```python
 def decrypt(key, ciphertext):
@@ -97,7 +97,7 @@ plaintext=sys.argv[2]+key
 cipher=encrypt(key,plaintext)
 ```
 
-The key is actually encrypted with itself alongside the actual flag. The main problem here is that we don't know the lengh of the flag nor that of the key. This means that we'll have to try every possible key length, at least at the begining. Since `text = flag + key`, it is guaranteed that `len(key) < len(text)` and thus we know for sure that at least the first letters of the key are reused in the encryption process. Since we don't have anymore clues, I decided to check every possible key lengh by decrypting the 5 letters blocks starting from each letter after the beginning of the flag that we know for sure. The fifth letter (actually the first one of the known text here) is a `}`, since we know that it is the last character of the actual flag. 
+The key is actually encrypted with itself alongside the flag. The main problem here is that we don't know the lengh of the flag nor that of the key. This means that we'll have to try every possible key length, at least at the begining. Since `text = flag + key`, it is guaranteed that `len(key) < len(text)` and thus we know for sure that at least the first letters of the key are reused in the encryption process. Since we don't have anymore clues, I decided to check every possible key lengh by decrypting the 5 letters blocks starting from each letter after the beginning of the flag that we know for sure. The fifth letter (actually the first one of the known text here) is a `}`, since we know that it is the last character of the actual flag. 
 
 ```python
 # Returns the key used to encrypt clear into cipher
@@ -124,7 +124,7 @@ key = "}R4ge"
 display_possibilities(key, ciphertext)
 ```
 
-This will give us every possible key-part used to decrypt the known block at all possible positions in the text.
+This will give us every possible key used to decrypt the known block at all possible positions in the text.
 
 ```
 $ ./vigEasy.py 
@@ -175,9 +175,10 @@ i=24 >> gePas
 
 The first two letters are the last two ones from the already-known part of the key, and the rest is an actual word that makes sense with the first one (TN : "Rage pas" means "Don't rage" in French). 
 
-With that we can then find the length of the flag. Since the encrypted text is 47 characters long, and since the 24th to 28th characters of the cleartext are "}R4ge", the encryped key starts from the 25th character. So `len(flag) = 25` and `len(key) = 22`
+With that we can then find the length of the flag. Since the encrypted text is 47 characters long, and since the 24th to 28th characters of the cleartext are "}R4ge", the encryped key starts from the 25th character.  
+So `len(flag) = 25` and `len(key) = 22`
 
-We also found the following letters of the key. Now all we have to do is use the letters we know as a cleartext to find the next letters.
+We also found the following letters of the key. Now all we have to do is use the part of the key we know as a cleartext to find the next letters.
 
 
 ```python
