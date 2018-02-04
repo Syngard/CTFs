@@ -70,7 +70,7 @@ Desktop  Documents  Downloads  Music  Pictures  Public  Templates  Videos
 ./Videos:
 ```
 
-Okay so we have to look inside of the other folders. The first one that caught my eye was `.mozilla`. After a bit a looking around, i found a [tool](http://www.dumpzilla.org/) that allowed easy data recovery from a `.mozilla` file. With a bit of help from the manual, I looked at the users downloads, his or her history, bookmarks and registered passwords. 
+Okay so we have to look inside the other folders. The first one that caught my eye was `.mozilla`. After a bit a looking around, i found a [tool](http://www.dumpzilla.org/) that allowed easy data recovery from a `.mozilla` file. With a bit of help from the manual, I looked at the users downloads, his or her history, bookmarks and registered passwords. 
 
 ``` 
 $ python dumpzilla.py .mozilla/firefox/c3a958fk.default/ --Downloads --History --Bookmarks --Passwords
@@ -240,11 +240,11 @@ $ hd file | head
 00000090  2a 1f 49 25 f4 fe db 3b  e8 6e 00 0f 98 19 89 ca  |*.I%...;.n......|
 ```
 
-What could this file be ? I thought at first that it might be a trap, a false track. But given that this was only a 75 points challenge that would be wierd. My guess was that this was en encrypted image
+What could this file be ? I thought at first that it might be a trap, a wrong track. But given that this was only a 75 points challenge that would be wierd. My guess was that this was an encrypted image
 
 I then looked at the main image formats headers to see if one was more or less similar to the one I had. And I found exactly [what I was looking for](https://en.wikipedia.org/wiki/Portable_Network_Graphics#File_header).
 
-The first byte corresponds but we have to insert a second byte to form a valid PNG header. So that's exactly what I did
+The first byte corresponds but we have to insert a second byte at `0x50` to form a valid PNG header. So that's exactly what I did
 
 ```python
 with open('file','rb') as f1:
@@ -259,7 +259,7 @@ with open('file','rb') as f1:
             else: break
 ```
 
-Once ze run this scrip we get an image that we can open
+Once we run this script we get an image that we can open.
 
 [](./decoded_file.png)
 
