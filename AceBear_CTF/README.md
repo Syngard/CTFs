@@ -12,7 +12,7 @@
 Contrary to most CTFs, the welcome challenge wasn't a "free" one. Ableit not a very hard one.
 The first thing I thought about was a simple hex encoding so I looked for an online decoder because I'm lazy.
 
-![Image of Hex decoder](./hex_decoder.png)
+![Image of Hex decoder](./hex_decode.png)
 
 Welp, doesn't seem like what we're loking for. 
 
