@@ -24,5 +24,5 @@ By looking at the given implementation of fHash, we see that :
 * It returns the concatenation of the final values of `hl` and `hr`
 
 We have to find another value `M2`, as well as the corresponding `hl` and `hr`, that will hash to the same result as the given example.
-To be clearer, il the `hl` and `hr` variables with a number corresponding to the number of rounds. So the output will be `hl4 + hr4`. From that we have to determine `hl0` and `hr0`, as well as `M2`.
+To be clearer, I'll name the `hl` and `hr` variables with a number corresponding to the number of rounds. So the output will be `hl4 + hr4`. From that we have to determine `hl0` and `hr0`, as well as `M2`.
 
