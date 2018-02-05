@@ -261,6 +261,6 @@ with open('file','rb') as f1:
 
 Once we run this script we get an image that we can open.
 
-[](./decoded_file.png)
+[decoded file](./decoded_file.png)
 
 Even if it is just the upper half, we can still easily read the flag.
