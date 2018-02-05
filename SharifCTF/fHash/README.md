@@ -14,14 +14,15 @@
 ## Solution write-up
 
 By looking at the given implementation of fHash, we see that :
-    * It takes 3 inputs : one that is 8 bytes long (called `M`) and two that are 2 bytes long (`hl` and `hr`).
-    * It cuts M into four two-bytes values
-    * For each of the smaller inputs (`hl and `hr`):
-        * It concatenates it with the first section M
-        * It hashes the resulting string with md5
-        * It replaces the value of hl/hr with the first two bytes of the hash
-        * It repeats the operation with this new value and the second section of M, then with the third and the last one
-    * It returns the concatenation of the final values of `hl` and `hr`
+* It takes 3 inputs : one that is 8 bytes long (called `M`) and two that are 2 bytes long (`hl` and `hr`).
+* It cuts M into four two-bytes values
+* For each of the smaller inputs (`hl` and `hr`):
+    * It concatenates it with the first section M
+    * It hashes the resulting string with md5
+    * It replaces the value of hl/hr with the first two bytes of the hash
+    * It repeats the operation with this new value and the second section of `M`, then with the third and the last one
+* It returns the concatenation of the final values of `hl` and `hr`
 
-We have to find another value M2, as well as the corresponding hl and hr, that will hash to the same result as the given example.
+We have to find another value `M2`, as well as the corresponding `hl` and `hr`, that will hash to the same result as the given example.
+To be clearer, il the `hl` and `hr` variables with a number corresponding to the number of rounds. So the output will be `hl4 + hr4`. From that we have to determine `hl0` and `hr0`, as well as `M2`.
 
