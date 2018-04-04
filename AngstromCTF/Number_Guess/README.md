@@ -26,6 +26,8 @@ Okay so the result was 686310, now we can try to find the two integers in the du
 
 
 After looking around for a few seconds, we get this :
+
+
 ```python
 >>> 0x5e3e8 + 0x494fe
 686310
