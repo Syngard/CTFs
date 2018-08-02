@@ -18,7 +18,7 @@ while payout(line2):
 
 
 Since the value has to be successfuly converted to a float and must not validate the check 
-`if bet <= 0:`, I looked around to see what special values could be converted to float. I found that '-inf', '+inf' and 'Nan' worked. However, since the infinite values can be compared to other numbers, the checks wont be validated. But comparing 'Nan' and any other number will always return `False`, and we can get the flag with that.
+`if bet <= 0:`, I looked around to see what special values could be converted to float. I found that '-inf', '+inf' and 'NaN' worked. However, since the infinite values can be compared to other numbers, the checks wont be validated. But comparing 'Nan' and any other number will always return `False`, and we can get the flag with that.
 
 
 ```
