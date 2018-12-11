@@ -230,7 +230,7 @@ for flag in mo4r_test_flags:
 ```
 
 However, when we test that - for a reason I don't understand - it seems that none of the hashes matches the one we're looking for. 
-Still, when we test individually each potential flag in a terminal we find that 
+Still, when we test individually each potential flag in a terminal we find that :
 
 ```
 $ echo "34C3_mo4r_schn4kes_tzzzz" | md5sum
@@ -238,3 +238,6 @@ $ echo "34C3_mo4r_schn4kes_tzzzz" | md5sum
 ```
 
 And there is our flag : 34C3\_mo4r\_schn4kes\_tzzzz
+
+
+EDIT : The reason was that `echo` inserts a '\n' at the end of the string, and we didn't insert one before testing the hashes in our script.
