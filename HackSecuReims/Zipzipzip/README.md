@@ -1,4 +1,4 @@
-#[Crypto] Zipzipzip 
+# [Crypto] Zipzipzip 
 
 ## Déchiffrement du fichier
 On se retrouve avec un fichier `flag.zip.enc` qui sera donc un zip chiffré. Une manière typique de chiffrer des fichiers dans ce type d'épreuves est un simple XOR. Grâce aux propriétés du XOR, on peut retrouver la clé (ou au moins une partie) en connaissant le fichier clair original. Ici on sait que le fichier est une archive ZIP. On regarde donc quels sont les premiers octets caractéristiques (aussi appelés *magic bytes*) de ce type de fichiers. Wikipedia nous donne la réponse (https://en.wikipedia.org/wiki/List\_of\_file\_signatures) : `50 4B 03 04`. En XORant ces octets avec les quatre premiers du fichier chiffré on peut ainsi récupérer la clé de chiffrement.
