@@ -1,4 +1,4 @@
-#[Crypto] RSA0 
+# [Crypto] RSA0 
 
 En dézippant l'archive fournie, on se retrouve avec un fichier `enc.txt` qui contient une liste de nombres, ainsi que le script `rsa0.py` ayant servi à chiffrer le flag. En lisant ce script, on voir que chaque caractère du message clair est chiffré indépendamment des autres. On peut donc appliquer la même méthode que pour le challenge `hashes` : 
   * Construire un dictionnaire associant les caractères à leur valeur chiffrée (que l'on peut simplement recalculer puisque l'on dispose de la clé publique).
