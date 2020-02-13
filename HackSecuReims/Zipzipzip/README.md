@@ -50,7 +50,7 @@ L'archive, en plus du fichier `flag.txt`, contient un fichier nommé `darkc0de.t
 ```
 $ wget https://raw.githubusercontent.com/danielmiessler/SecLists/master/Passwords/darkc0de.txt
 [...]
-$ zip dark.zip darkc0de.txt 
+$ zip darkc0de.zip darkc0de.txt 
   adding: darkc0de.txt (deflated 68%)
 $ pkcrack -C flag.zip -c darkc0de.txt -P darkc0de.zip -p darkc0de.txt -d decrypted.zip -a
 [...]
