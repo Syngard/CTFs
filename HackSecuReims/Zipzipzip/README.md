@@ -81,9 +81,9 @@ HSR{Kp74_x0r_1s_n07_s3cUrEd}
 Etant donné que le fichier `darkc0de.txt` est un dictionnaire de mots de passe, on pouvait aussi penser à utiliser cette liste pour ouvrir le zip, et c'était également une méthode valable. On extrait dans un premier temps le hash du mot de passe du zip, puis on tente de le cracker avec le dictionnaire que l'on vient de récupérer.
 
 ```
-zip2john flag.zip  > hash.john 
+$ zip2john flag.zip  > hash.john 
 [...]
-$ john --wordlist=$(pwd)darkc0de.txt hash.john
+$ john --wordlist=$(pwd)/darkc0de.txt hash.john
 [...]
 $ john --show hash.john                                                                
 flag.zip:mic12013pid0p7312::flag.zip:flag.txt, darkc0de.txt:flag.zip
